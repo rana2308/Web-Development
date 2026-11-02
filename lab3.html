@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<head>
+    <title>Greeting App</title>
+
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+          background: #0b1220;
+          color: #eaf2ff;
+          font-family: Arial, sans-serif;
+        }
+
+        .container {
+          width: 100%;
+          max-width: 400px;
+          padding: 35px 25px;
+          background: #152238;
+          border: 1px solid #294569;
+          border-radius: 15px;
+          text-align: center;
+          box-shadow: 0 10px 30px #00000050;
+        }
+
+        h1 {
+          margin: 0 0 25px;
+          color: #60a5fa;
+          font-size: 28px;
+          overflow-wrap: anywhere;
+        }
+
+        .input-row {
+          display: flex;
+          gap: 10px;
+        }
+
+        input {
+          flex: 1;
+          min-width: 0;
+          padding: 12px;
+          background: #0b1220;
+          color: white;
+          border: 1px solid #375477;
+          border-radius: 7px;
+          font-size: 15px;
+        }
+
+        input::placeholder {
+          color: #a9bbd3;
+        }
+
+        input:focus {
+          outline: 2px solid #60a5fa;
+          outline-offset: 2px;
+        }
+
+        button {
+          padding: 12px 18px;
+          background: #2563eb;
+          color: white;
+          border: none;
+          border-radius: 7px;
+          font-size: 15px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background: #1d4ed8;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        li {
+          margin-top: 10px;
+          padding: 12px;
+          background: #1c3452;
+          border-radius: 7px;
+          cursor: pointer;
+          overflow-wrap: anywhere;
+        }
+
+        li:first-child {
+          margin-top: 20px;
+        }
+
+        li:hover {
+          background: #274b75;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1 id="title">Welcome</h1>
+
+    <div class="input-row">
+        <input id="name" placeholder="Your name" aria-label="Your name">
+        <button id="greet">Greet</button>
+    </div>
+
+    <ul id="list"></ul>
+</div>
+
+<script>
+    function addName() {
+      const input = document.getElementById('name');
+      const name = input.value.trim();
+
+      if (!name) return;
+
+      document.getElementById('title').textContent =
+        `Hello, ${name}!`;
+
+      const li = document.createElement('li');
+      li.textContent = name;
+      document.getElementById('list').appendChild(li);
+
+      input.value = '';
+    }
+
+
+    function removeName(e) {
+      if (e.target.nodeName === 'LI') {
+        const name = e.target.textContent;
+
+        document.getElementById('title').textContent =
+          `Goodbye, ${name}!`;
+
+        e.target.remove();
+      }
+    }
+
+    document.getElementById('greet')
+      .addEventListener('click', addName);
+
+    document.getElementById('list')
+      .addEventListener('click', removeName);
+</script>
+</body>
+</html>
